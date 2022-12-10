@@ -1,5 +1,5 @@
 {
-  "name": "stripe3ds",
+  "name": "basistheory3DS",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@basis-theory/basis-theory-js": "^1.57.0",
+    "@basis-theory/basis-theory-react": "^1.7.0",
+    "@stripe/react-stripe-js": "^1.16.1",
+    "@stripe/stripe-js": "^1.46.0",
     "@types/node": "18.11.12",
+    "@types/qs": "^6.9.7",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
+    "console-feed": "3.3.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
+    "qs": "^6.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "stripe": "^11.3.0",
     "typescript": "4.9.4"
   }
 }
