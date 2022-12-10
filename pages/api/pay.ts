@@ -8,13 +8,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const logger = new Logger();
-  const {token, chargeWith} = JSON.parse(req.body);
+  const {token} = JSON.parse(req.body);
 
+
+  logger.log(`CHARGING WITH stripe:`)
   const paymentMethod = await createPaymentMethodFromToken(token, logger);
   logger.log("Created Payment Method:")
   logger.log(paymentMethod)
 
-  logger.log(`CHARGING WITH: ${chargeWith}:`)
   const paymentIntent = await createPaymentIntentFromPaymentMethod(paymentMethod, logger);
   logger.log("Created Payment Intent:")
   logger.log(paymentIntent)
