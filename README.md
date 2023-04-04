@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 3DS Examples
+
+This repository contains 3DS implementation examples using different gateways. It aims to exemplify how to integrate [Basis Theory Elements](https://developers.basistheory.com/docs/sdks/web/react/) card capture with your 3DS implemenation of choosing.
+
+![example.gif](./images/example.gif)
 
 ## Getting Started
 
