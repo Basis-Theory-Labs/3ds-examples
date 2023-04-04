@@ -5,7 +5,7 @@ const createPayment = async (basisTheoryToken: string) => {
       'Content-Type': 'application/json',
       'x-API-key': `${process.env.ADYEN_API_CREDENTIAL}`,
       'BT-PROXY-URL': 'https://checkout-test.adyen.com/v69/payments',
-      'BT-API-KEY': `${process.env.BASIS_THEORY_PRIVATE}`,
+      'BT-API-KEY': `${process.env.BASIS_THEORY_PRIVATE_KEY}`,
     },
     body: JSON.stringify({
       amount: {

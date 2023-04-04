@@ -7,7 +7,7 @@ import styles from '@/styles/Home.module.css';
 const Adyen = () => {
   const { bt } = useBasisTheory();
   const cardRef = useRef(null);
-  const [status, setStatus] = useState('Pay for your $20.00 fee.');
+  const [status, setStatus] = useState('Pay for your $20.00 fee');
   const [isBusy, setIsBusy] = useState(false);
   const [paymentAction, setPaymentAction] = useState();
 
@@ -86,7 +86,7 @@ const Adyen = () => {
       const { action, resultCode } = payment;
 
       if (resultCode === 'IdentifyShopper') {
-        setStatus('3DS verification required.');
+        setStatus('3DS verification required');
         setPaymentAction(action);
       } else {
         setStatus(`Payment ${resultCode}`);

@@ -6,10 +6,13 @@ const Home = () => (
   <div className={styles.container}>
     <main className={styles.main}>
       <div className={styles.link}>
-        <Link href="/stripe">{'Test Stripe'}</Link>
+        <Link href="/stripe">{'Stripe'}</Link>
       </div>
       <div className={styles.link}>
-        <Link href="/adyen">{'Test Adyen'}</Link>
+        <Link href="/adyen">{'Adyen'}</Link>
+      </div>
+      <div className={styles.link}>
+        <Link href="/spreedly">{'Spreedly'}</Link>
       </div>
     </main>
   </div>

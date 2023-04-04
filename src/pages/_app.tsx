@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const { bt } = useBasisTheory(process.env.NEXT_PUBLIC_BASIS_THEORY_PUBLIC, {
     elements: true,
   });
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC!);
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
   return (
     <Elements stripe={stripePromise}>

@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react';
 import { useBasisTheory } from '@basis-theory/basis-theory-react';
-import type { PaymentIntent } from '@stripe/stripe-js';
 import Head from 'next/head';
-import { LogViewer, StripeActivate3Ds, CardElement } from '@/components';
+import { CardElement, LogViewer } from '@/components';
+import { SpreedlyActivate3Ds } from '@/components/SpreedlyActivate3Ds';
 import styles from '@/styles/Home.module.css';
 
-const Stripe = () => {
+const Spreedly = () => {
   const { bt } = useBasisTheory();
   const cardRef = useRef(null);
   const [status, setStatus] = useState('Pay for your $20.00 fee');
   const [isBusy, setIsBusy] = useState(false);
-  const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
+  const [transactionToken, setTransactionToken] = useState<string>();
 
   const setElementValue = () => {
     cardRef.current?.setValue({
@@ -21,18 +21,10 @@ const Stripe = () => {
     });
   };
 
-  const callback3DS = (errorMessage: string) => {
+  const callback3DS = (paymentStatus) => {
     setIsBusy(false);
-
-    if (errorMessage) {
-      setStatus(errorMessage);
-      console.debug('CLIENT:', `3DS Failed with message: ${errorMessage}`);
-
-      return;
-    }
-
-    console.debug('CLIENT:', 'Payment was successfully charged');
-    setStatus('Payment successfully charged.');
+    setStatus(`Payment ${paymentStatus}`);
+    console.debug('CLIENT:', `Payment ${paymentStatus}`);
   };
 
   const submit = async (): Promise<void> => {
@@ -55,35 +47,36 @@ const Stripe = () => {
       });
 
       console.debug('CLIENT:', basisTheoryToken);
+      console.debug('CLIENT:', 'Send to Backend /pay/spreedly API');
 
-      console.debug('CLIENT:', 'Send to Backend /pay/stripe API');
       const payResponse = await (
-        await fetch('/api/pay/stripe', {
+        await fetch('/api/pay/spreedly', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             token: basisTheoryToken.id,
+            browserInfo: window.Spreedly.ThreeDS.serialize(
+              '05', // browser size
+              'text/html,application/xhtml+xml;q=0.9,*/*;q=0.8' // accept header
+            ),
           }),
         })
       ).json();
 
-      payResponse.logs.forEach((l: string) => console.debug('SERVER:', l));
+      payResponse.logs?.forEach((l: string) => console.debug('SERVER:', l));
 
-      if (payResponse.paymentIntent.status === 'requires_confirmation') {
-        setStatus('3DS verification required');
-        setPaymentIntent(payResponse.paymentIntent);
-      } else {
-        setIsBusy(false);
-      }
+      setStatus('3DS verification required');
+      setTransactionToken(payResponse.transactionToken); // test scenario is always 3DS challenge
     }
   };
 
   return (
     <>
       <Head>
-        <title>{'Stripe 3DS Test'}</title>
+        <title>{'Spreedly 3DS Test'}</title>
+        <script src="https://core.spreedly.com/iframe/iframe-v1.min.js" />
       </Head>
       <div className={styles.container}>
         <main className={styles.main}>
@@ -106,10 +99,10 @@ const Stripe = () => {
               {'Submit'}
             </button>
           </div>
-          {paymentIntent && (
-            <StripeActivate3Ds
+          {transactionToken && (
+            <SpreedlyActivate3Ds
               onDone={callback3DS}
-              paymentIntent={paymentIntent}
+              transactionToken={transactionToken}
             />
           )}
         </main>
@@ -121,4 +114,4 @@ const Stripe = () => {
   );
 };
 
-export default Stripe;
+export default Spreedly;

@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const logger = new Logger();
   const { token } = req.body;
 
-  logger.log(`CHARGING WITH adyen:`);
+  logger.log(`Charging with Adyen:`);
   const payment = await createPayment(token);
 
   logger.log('Created Payment:');

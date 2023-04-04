@@ -52,6 +52,12 @@
   color: white;
 }
 
+.spreedlyIframe {
+  margin-top: 16px;
+  min-width: 500px;
+  min-height: 300px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

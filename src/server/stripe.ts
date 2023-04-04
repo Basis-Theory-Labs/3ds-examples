@@ -32,7 +32,7 @@ const headers = {
     `${process.env.STRIPE_PRIVATE_PRIVATE}:`
   ).toString('base64')}`,
   'BT-PROXY-URL': 'https://api.stripe.com/v1/payment_methods',
-  'BT-API-KEY': `${process.env.BASIS_THEORY_PRIVATE}`,
+  'BT-API-KEY': `${process.env.BASIS_THEORY_PRIVATE_KEY}`,
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 };
 

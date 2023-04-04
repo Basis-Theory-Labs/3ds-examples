@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const logger = new Logger();
   const { token } = req.body;
 
-  logger.log(`CHARGING WITH stripe:`);
+  logger.log(`Charging with Stripe:`);
   const paymentMethod = await createPaymentMethod(token, logger);
 
   logger.log('Created Payment Method:');
