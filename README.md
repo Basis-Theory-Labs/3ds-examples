@@ -23,9 +23,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Stripe
 
 Test Cards
-- [All Stripe test cards](https://stripe.com/docs/payments/3d-secure#three-ds-cards)
+- [Full list](https://stripe.com/docs/payments/3d-secure#three-ds-cards)
 - 4000000000003220
 
-Example
-![Stripe 3DS Video](readme/stripe.gif)
+### Adyen
 
+Test Cards
+- [Full list](https://docs.adyen.com/development-resources/testing/test-card-numbers#test-3d-secure-2-authentication)
+- 3714 4963 5398 431  03/30  7373
