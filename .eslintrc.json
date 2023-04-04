@@ -1,3 +1,33 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": "@basis-theory/eslint-config/next",
+  "rules": {
+    "no-console": "off",
+    "unicorn/no-null": "off",
+    "node/no-process-env": "off",
+    "camelcase": [
+      "error",
+      {
+        "allow": [
+          "payment_method_types",
+          "payment_method",
+          "expires_at",
+          "expiration_date",
+          "deduplicate_token",
+          "search_indexes",
+          "expiration_month",
+          "expiration_year",
+          "exp_month",
+          "exp_year",
+          "stripe_customer",
+          "stripe_token"
+        ]
+      }
+    ]
+  },
+  "settings":  {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
 }
