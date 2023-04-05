@@ -1,9 +1,12 @@
-import React, { ForwardedRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { CardElement as ICardElement } from '@basis-theory/basis-theory-js/types/elements';
-import { CardElement } from '@basis-theory/basis-theory-react';
+import {
+  CardElement,
+  CardElementProps,
+} from '@basis-theory/basis-theory-react';
 
-const CardElementWrapper = React.forwardRef(
-  (params: any, ref: ForwardedRef<ICardElement>) => (
+const CardElementWrapper = forwardRef(
+  (props: CardElementProps, ref: ForwardedRef<ICardElement>) => (
     <div className="row row-input">
       <CardElement
         id="myCard"
@@ -26,6 +29,7 @@ const CardElementWrapper = React.forwardRef(
             },
           },
         }}
+        {...props}
       />
     </div>
   )

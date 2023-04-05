@@ -17,7 +17,7 @@ const StripeActivate3Ds = ({ paymentIntent, onDone }: Props) => {
     console.debug('CLIENT:', paymentIntent);
 
     const threeDSPaymentIntent: PaymentIntentResult =
-      await stripe?.confirmCardPayment(paymentIntent.client_secret as string);
+      await stripe!.confirmCardPayment(paymentIntent.client_secret as string);
 
     console.debug('CLIENT:', `Completed 3DS`);
     onDone(threeDSPaymentIntent?.error?.message);
@@ -32,7 +32,7 @@ const StripeActivate3Ds = ({ paymentIntent, onDone }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return false;
+  return null;
 };
 
 export { StripeActivate3Ds };

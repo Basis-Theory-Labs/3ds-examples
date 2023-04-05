@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import type { CardElementValue } from '@basis-theory/basis-theory-js/types/elements';
 import { useBasisTheory } from '@basis-theory/basis-theory-react';
 import Head from 'next/head';
 import { CardElement, LogViewer } from '@/components';
@@ -11,17 +12,18 @@ const Spreedly = () => {
   const [status, setStatus] = useState('Pay for your $20.00 fee');
   const [isBusy, setIsBusy] = useState(false);
   const [transactionToken, setTransactionToken] = useState<string>();
+  const [testCard, setTestCard] = useState<CardElementValue<'static'>>();
 
   const setElementValue = () => {
-    cardRef.current?.setValue({
-      number: '4000000000003220',
-      expiration_month: '12',
-      expiration_year: '32',
+    setTestCard({
+      number: '4111111111111111',
+      expiration_month: 12,
+      expiration_year: 32,
       cvc: '123',
     });
   };
 
-  const callback3DS = (paymentStatus) => {
+  const callback3DS = (paymentStatus: string) => {
     setIsBusy(false);
     setStatus(`Payment ${paymentStatus}`);
     console.debug('CLIENT:', `Payment ${paymentStatus}`);
@@ -82,7 +84,7 @@ const Spreedly = () => {
         <main className={styles.main}>
           <div id="form">
             <h1>{status}</h1>
-            <CardElement id="myCard" ref={cardRef} />
+            <CardElement id="myCard" ref={cardRef} value={testCard} />
             <button
               className={styles.setTestCardButton}
               onClick={setElementValue}

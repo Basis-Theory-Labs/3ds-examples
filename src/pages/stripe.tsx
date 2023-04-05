@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import type { CardElementValue } from '@basis-theory/basis-theory-js/types/elements';
 import { useBasisTheory } from '@basis-theory/basis-theory-react';
 import type { PaymentIntent } from '@stripe/stripe-js';
 import Head from 'next/head';
@@ -11,17 +12,18 @@ const Stripe = () => {
   const [status, setStatus] = useState('Pay for your $20.00 fee');
   const [isBusy, setIsBusy] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState<PaymentIntent>();
+  const [testCard, setTestCard] = useState<CardElementValue<'static'>>();
 
   const setElementValue = () => {
-    cardRef.current?.setValue({
+    setTestCard({
       number: '4000000000003220',
-      expiration_month: '12',
-      expiration_year: '32',
+      expiration_month: 12,
+      expiration_year: 32,
       cvc: '123',
     });
   };
 
-  const callback3DS = (errorMessage: string) => {
+  const callback3DS = (errorMessage?: string) => {
     setIsBusy(false);
 
     if (errorMessage) {
@@ -89,7 +91,7 @@ const Stripe = () => {
         <main className={styles.main}>
           <div id="form">
             <h1>{status}</h1>
-            <CardElement id="myCard" ref={cardRef} />
+            <CardElement id="myCard" ref={cardRef} value={testCard} />
             <button
               className={styles.setTestCardButton}
               onClick={setElementValue}

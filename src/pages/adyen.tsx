@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { CardElementValue } from '@basis-theory/basis-theory-js/types/elements';
 import { useBasisTheory } from '@basis-theory/basis-theory-react';
 import Head from 'next/head';
 import { AdyenActivate3Ds, CardElement, LogViewer } from '@/components';
@@ -10,12 +11,13 @@ const Adyen = () => {
   const [status, setStatus] = useState('Pay for your $20.00 fee');
   const [isBusy, setIsBusy] = useState(false);
   const [paymentAction, setPaymentAction] = useState();
+  const [testCard, setTestCard] = useState<CardElementValue<'static'>>();
 
   const setElementValue = () => {
-    cardRef.current?.setValue({
+    setTestCard({
       number: '371449635398431',
-      expiration_month: '03',
-      expiration_year: '30',
+      expiration_month: 3,
+      expiration_year: 30,
       cvc: '7373',
     });
   };
@@ -104,7 +106,7 @@ const Adyen = () => {
       <main className={styles.main}>
         <div id="form">
           <h1>{status}</h1>
-          <CardElement id="myCard" ref={cardRef} />
+          <CardElement id="myCard" ref={cardRef} value={testCard} />
           <button
             className={styles.setTestCardButton}
             onClick={setElementValue}
